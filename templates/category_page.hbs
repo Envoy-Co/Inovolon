@@ -1,0 +1,257 @@
+  <section class="section hero category-hero" >
+  <div class="hero-inner">
+    <h2> <span class="hero-hello"> How can we help? </span> </h2>
+    <h2 class="visibility-hidden">{{ t 'search' }}</h2>
+    {{search submit=false instant=true scoped=true class='search search-full'}}
+  </div>
+</section>
+
+<div class="container">
+  <div class="category-container" id="cat-id-{{category.id}}">
+    <div class="category-content">
+      <header class="page-header">
+        <h1>{{category.name}}</h1>
+        {{!-- #if category.description}}
+          <p class="page-header-description">{{category.description}}</p>
+        {{/if --}}
+      </header>
+
+      <div class="section-tree">
+        {{#each sections}}
+        
+          <section class="section
+                          
+                  {{!-- Set default icons for section icons --}}
+                  {{#is name 'Getting Started'}} icon-getting-started{{/is}} 
+                  {{#is name 'Resources & Tips'}} icon-resources-tips{{/is}}
+				          {{!-- #is name 'Assets & Resources'}} icon-assets-resources{{/is --}}
+                  {{#is name 'Advice & Troubleshooting'}} icon-advice-troubleshooting{{/is}}" 
+                   
+           				id="sect-icon-{{id}}">
+            
+            <h2 class="section-tree-title">
+              <a href="{{url}}">{{name}}</a>
+            </h2>
+            {{#if articles}}
+              <ul class="article-list">
+                {{#each articles}}
+                  <li class="article-list-item{{#if promoted}} article-promoted{{/if}}">
+                  
+                    <a href="{{url}}" class="article-list-link">
+                      {{title}}
+                      {{!-- #if promoted}}
+                      	<span data-title="{{t 'promoted'}}" class="icon-star"></span>
+                      {{/if --}}
+                      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 37.07 37.07"><defs><style>.cls-1{fill:none;}.cls-2{fill:#1b3d6e;}.cls-3{clip-path:url(#clip-path);}</style><clipPath id="clip-path" transform="translate(-55.32 -53.9)"><rect class="cls-1" x="55.32" y="53.9" width="37.07" height="37.07"/></clipPath></defs><polygon class="cls-2" points="16.15 29.24 13.86 26.95 22 18.8 13.86 10.66 16.15 8.36 26.6 18.8 16.15 29.24"/><g class="cls-3"><path class="cls-2" d="M73.85,56.83A15.61,15.61,0,1,0,89.46,72.44,15.63,15.63,0,0,0,73.85,56.83m0,34.14A18.54,18.54,0,1,1,92.39,72.44,18.55,18.55,0,0,1,73.85,91" transform="translate(-55.32 -53.9)"/></g></svg>
+                    </a>
+
+                  </li>
+                {{/each}}
+                  {{#if more_articles}}
+                  <li>
+                    <a href="{{url}}" class="see-all-articles">
+                      {{t 'show_all_articles' count=article_count}}
+                    </a>
+                  </li>
+              {{/if}}
+              </ul>
+            
+            {{/if}}
+          </section>
+        {{else}}
+          <i class="category-empty">
+            <a href="{{category.url}}">{{t 'empty'}}</a>
+          </i>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Show sub-sections of USING INDICES for INDICES category --}}
+{{#is category.id 360003191752}}
+  <section class="section knowledge-base">
+      <h2>DOMAINS</h2>
+      <section class="categories blocks">
+        {{#each sections}}
+          	{{#is id 360008907771}}
+            
+        		{{!-- if the USING INDICES section --}}
+            <ul class="blocks-list">
+              {{#each sections}}
+
+                  <li class="blocks-item" id="cat-icon-{{id}}">
+                    <a href='{{url}}' class="blocks-item-link">
+                      <span class="blocks-item-title">{{name}}</span>
+                      {{!-- <span class="blocks-item-description">{{excerpt description}}</span> --}}
+                    </a>
+                  </li>
+              {{/each}}
+              </ul>
+
+            {{/is}}
+            {{/each}}
+              
+      </section>
+  {{/is}}
+    
+ {{!-- Show sub-sections of USING QSI-XL for QSI-XL category --}}
+{{#is category.id 360003190692}}
+  <section class="section knowledge-base">
+      <h2>CATEGORIES</h2>
+      <section class="categories blocks">
+        {{#each sections}}
+          	{{#is id 360008763372}}
+            
+        		{{!-- if the USING INDICES section --}}
+            <ul class="blocks-list">
+              {{#each sections}}
+
+                  <li class="blocks-item" id="cat-icon-{{id}}">
+                    <a href='{{url}}' class="blocks-item-link">
+                      <span class="blocks-item-title">{{name}}</span>
+                      {{!-- <span class="blocks-item-description">{{excerpt description}}</span> --}}
+                    </a>
+                  </li>
+              {{/each}}
+              </ul>
+
+            {{/is}}
+            {{/each}}
+              
+      </section>
+  {{/is}}   
+    
+    {{!-- Show sub-sections of USING QSHR for QSHR category --}}
+{{#is category.id 360003191912}}
+  <section class="section knowledge-base">
+      <h2>CATEGORIES</h2>
+      <section class="categories blocks">
+        {{#each sections}}
+          	{{#is id 360009992611}}
+            
+        		{{!-- if the USING INDICES section --}}
+            <ul class="blocks-list">
+              {{#each sections}}
+
+                  <li class="blocks-item" id="cat-icon-{{id}}">
+                    <a href='{{url}}' class="blocks-item-link">
+                      <span class="blocks-item-title">{{name}}</span>
+                      {{!-- <span class="blocks-item-description">{{excerpt description}}</span> --}}
+                    </a>
+                  </li>
+              {{/each}}
+              </ul>
+
+            {{/is}}
+            {{/each}}
+              
+      </section>
+  {{/is}}   
+    
+    {{!-- Show sub-sections of USING ePASS for ePASS category --}}
+{{#is category.id 360003218211}}
+  <section class="section knowledge-base">
+      <h2>ROLES</h2>
+      <section class="categories blocks">
+        {{#each sections}}
+          	{{#is id 360009630352}}
+            
+        		{{!-- if the USING ePASS section --}}
+            <ul class="blocks-list">
+              {{#each sections}}
+
+                  <li class="blocks-item" id="cat-icon-{{id}}">
+                    <a href='{{url}}' class="blocks-item-link">
+                      <span class="blocks-item-title">{{name}}</span>
+                      {{!-- <span class="blocks-item-description">{{excerpt description}}</span> --}}
+                    </a>
+                  </li>
+              {{/each}}
+              </ul>
+
+            {{/is}}
+            {{/each}}
+              
+      </section>
+  {{/is}}   
+    {{!-- Show sub-sections of Training Category --}}
+{{#is category.id 360002469932}}
+  <section class="section knowledge-base">
+      <h2>OFFERINGS</h2>
+      <section class="categories blocks">
+        {{#each sections}}
+          	{{#is id 360010295211}}
+            
+        		{{!-- if the USING INDICES section --}}
+            <ul class="blocks-list">
+              {{#each sections}}
+
+                  <li class="blocks-item" id="cat-icon-{{id}}">
+                    <a href='{{url}}' class="blocks-item-link">
+                      <span class="blocks-item-title">{{name}}</span>
+                      {{!-- <span class="blocks-item-description">{{excerpt description}}</span> --}}
+                    </a>
+                  </li>
+              {{/each}}
+              </ul>
+
+            {{/is}}
+            {{/each}}
+              
+      </section>
+  {{/is}}   
+      <div class="container">
+
+<div class="browse-common-questions">
+    <h3>Featured Articles</h3>
+      	<div class="sect">
+            {{#each sections}}
+            	{{#each articles}}
+          			  {{#if promoted}}
+                <a href="{{url}}">
+                  <span>{{title}}</span>
+                  <p>{{excerpt body characters=333}}</p>
+                </a>
+                    {{/if}}
+            	{{/each}}
+            {{/each}}
+          
+            {{#each sections}}
+          				{{#each sections}}
+            					{{#each articles}}
+          			  {{#if promoted}}
+                <a href="{{url}}">
+                  <span>{{title}}</span>
+                  <p>{{excerpt body characters=333}}</p>
+                </a>
+                    {{/if}}
+            	{{/each}}
+          	{{/each}}
+            {{/each}}
+      	</div>
+  </div>
+</div>
+    
+{{!-- 
+<div class="browse-common-questions">
+  <div class="container">
+    <h3>Browse Common Questions</h3>
+    <ul class="browse-nav">
+      {{#each sections}}
+      	<li><a class="select-tab {{#is @index 0}}ui-state-active{{/is}}" href="#sect-tab-{{id}}" >{{name}}</a></li>
+      {{/each}}
+    </ul>
+      {{#each sections}}
+      	<div class="sect" id="sect-tab-{{id}}">
+            {{#each articles}}
+            	<a href="{{url}}">
+                <span>{{title}}</span>
+                <p>{{excerpt body characters=333}}</p>
+          		</a>
+            {{/each}}
+      	</div>
+      {{/each}}
+  </div>
+</div>
+--}}

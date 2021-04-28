@@ -1,0 +1,174 @@
+<!-- Alerts -->
+{{#each categories}}
+  {{#is name 'Announcements'}}
+    {{#each sections}}
+      {{#each articles}}
+        <div id="alerts-banner">
+          <div class="alert">
+            <a href="{{url}}"><strong class="ticket-link">{{title}}</strong></a>
+          </div>
+          <a href="#" class="btn-close"></a>
+        </div>
+      {{/each}}
+    {{/each}}
+  {{/is}}
+{{/each}}
+{{!-- IE warning --}}
+<div class="ie-warning">
+  <p>For the best experience and to avoid any technical issues, please use<br /> a newer browser such as Chrome, Safari, or Firefox. Thank you.</p>
+</div>
+{{!-- /IE warning --}}
+<h1 class="visibility-hidden">{{ help_center.name }}</h1>
+<style type="text/css">
+.blocks-item:hover .blocks-circle {
+  transform: scale(1.1);
+}
+
+</style>
+{{#if signed_in}}
+  <!-- <section class="section hero">
+  <div class="hero-inner">
+    <h2> <span class="hero-hello"> How can we help? </span> </h2>
+    <h2 class="visibility-hidden">{{ t 'search' }}</h2>
+    {{search submit=false instant=settings.instant_search class='search search-full'}}
+  </div>
+</section> -->
+  <section class="section homepage-hero hero">
+    <div class="hero-inner">
+      <h2> <span class="hero-hello"> How can we help? </span> </h2>
+      <h2 class="visibility-hidden">{{ t 'search' }}</h2>
+      {{search submit=false instant=true class='search search-full'}}
+    </div>
+  </section>
+  <div class="container">
+    <section class="section knowledge-base kb-top">
+      <h2 class="visibility-hidden">{{ t 'categories' }}</h2>
+      <section class="categories blocks">
+        <ul class="blocks-list">
+          {{#each categories}}
+            {{#is name 'Getting Started'}}
+              <!--look here to Get Started-->
+              <li class="blocks-item" id="cat-icon-{{id}}">
+                <a href='{{url}}' class="blocks-item-link">
+                  <span class="blocks-item-title">{{name}}</span>
+                </a>
+              </li>
+            {{/is}}
+            {{#is name 'FAQs'}}
+              <li class="blocks-item" id="cat-icon-{{id}}">
+                <a href='{{url}}' class="blocks-item-link">
+                  <span class="blocks-item-title">{{name}}</span>
+                </a>
+              </li>
+            {{/is}}
+          {{/each}}
+          {{#if help_center.community_enabled}}
+            <li class="blocks-item" id="cat-icon-community">
+              {{#link 'community' class="blocks-item-link"}}
+              <span class="blocks-item-title">Community</span>
+              {{/link}}
+            </li>
+          {{/if}}
+        </ul>
+        {{pagination}}
+      </section>
+    </section>
+    <section class="section knowledge-base">
+      <h2>SOLUTIONS</h2>
+      <section class="categories blocks">
+        <ul class="blocks-list">
+          {{#each categories}}
+            {{#isnt name 'Announcements'}}
+              {{#isnt name 'FAQs'}}
+                {{#isnt name 'Getting Started'}}
+                  {{#isnt name 'Internal Information'}}
+                    {{#isnt name 'Getting Started'}}
+                      <li class="blocks-item" id="cat-icon-{{id}}">
+                        <a href='{{url}}' class="blocks-item-link">
+                          <span class="blocks-item-title">{{name}}</span>
+                          {{!-- <span class="blocks-item-description">{{excerpt description}}</span> --}}
+                        </a>
+                      </li>
+                    {{/isnt}}
+                  {{/isnt}}
+                {{/isnt}}
+              {{/isnt}}
+            {{/isnt}}
+          {{/each}}
+        </ul>
+        {{pagination}}
+      </section>
+      <div class="container blog-ad">
+        <a href="https://www.inovalon.com/inovalon-insights-blog/telehealth-improves-health-plan-performance/"><img src="{{asset 'homepage-bottom-ad.jpg'}}" alt="Ready Blog Post" /></a>
+      </div>
+{{/if}}
+<div class="anonymous anonymous-container">
+  <div class="anonymous-container-header">Support</div>
+  {{!-- <h1>Welcome to Inovalon Support</h1> --}}
+  <div class="anonymous-content">
+    <div class="container">
+      <div class="col col-info">
+        <p><strong>Our Help Center</strong> provides you direct access to Inovalon resources, user documentation, and support teams empowering you to create, manage, and view the status of all your requests with ease.</p>
+        <nav>
+            <a class="button button-large" href="https://support.inovalon.com/hc/en-us/articles/360052877731" class="ticket-link">Take a Tour</a>
+            <a class="button button-large" href="https://support.inovalon.com/hc/en-us/articles/360050308191-Logging-into-the-Help-Center" class="ticket-link">Login Help</a>
+            {{#link "sign_in" class="button button-large"}}
+            {{t 'sign_in'}}
+            {{/link}}
+        </nav>
+      </div>
+    <div class="col">
+      <div class="hours">
+        <div>
+        <h4>Hours of Operation</h4>
+        <p>Monday-Friday 8am to 8pm EST</p>
+        <p>Saturday-Sunday 10am to 6pm EST</p>
+        </div>
+      </div>
+      <div class="contact-us">
+        <div>
+        <h4>Contact Us:</h4>
+        <p>Inovalon ONE&trade; Platform (800) 591-9229</p>
+        <p>ePASS&reg; Provider Support (877) 448-8125</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{{!-- DISABLE 
+
+  {{#if promoted_articles}}
+  <section class="articles">
+    <h2>{{t 'promoted_articles'}}</h2>
+    <ul class="article-list promoted-articles">
+      {{#each promoted_articles}}
+      <li class="promoted-articles-item">
+        <a href="{{url}}">
+          {{title}}
+          {{#if internal}}
+          <span class="icon-lock" title="{{t 'internal'}}"></span>
+          {{/if}}
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+  </section>
+  {{/if}}
+</section>  --}}
+{{!-- DISABLE 
+  {{#if help_center.community_enabled}}
+  <section class="section home-section community">
+    <h2>{{t 'community'}}</h2>
+    {{#link 'community' class='community-link'}}
+    {{t 'join_conversation'}}
+    {{/link}}
+    <div class="community-image"></div>
+  </section>
+  {{/if}}
+  <section class="section home-section activity">
+    {{#if settings.show_recent_activity}}
+    {{recent_activity}}
+    {{/if}}
+  </section>
+  --}}

@@ -1,0 +1,30 @@
+<div class="interior-page">
+  <div class="container">
+    <nav class="sub-nav">
+      {{breadcrumbs}}
+      {{search submit=false}}
+    </nav>
+
+    <h1>
+      {{t 'submit_a_request'}}
+    </h1>
+
+    <div class="form">
+      {{request_form}}
+    </div>
+  </div>
+</div>
+
+
+<!-- Sarah from Zendesk added this script on 4.7.21 to hide specific fields on forms -->
+<script>
+var ticketForm = location.search.split('ticket_form_id=')[1];
+if(ticketForm == 360001405992) //VBPI Form  {
+$('.form-field.request_custom_fields_360030528412').hide()
+}
+  
+  var ticketForm = location.search.split('ticket_form_id=')[1];
+if(ticketForm == 360001450272) //Risk Product Enhancement Form  {
+$('.form-field.request_priority').hide()
+}
+</script>

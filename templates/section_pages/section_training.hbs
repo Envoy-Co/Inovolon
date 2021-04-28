@@ -1,0 +1,114 @@
+  <section class="section hero category-hero">
+  <div class="hero-inner">
+    <h2> <span class="hero-hello"> How can we help? </span> </h2>
+    <h2 class="visibility-hidden">{{ t 'search' }}</h2>
+    {{search submit=false scoped=true instant=true class='search search-full'}}
+  </div>
+</section>
+
+<div class="container">
+  <div class="category-container ">
+    <div class="category-content">
+   
+      <header class="page-header section-page-header section-page-header">
+
+          <h1>{{section.name}}</h1>
+          {{!-- #if settings.show_follow_section}}
+            {{subscribe}}
+          {{/if --}}
+{{!--           {{#if section.description}}
+            <p class="page-header-description">{{section.description}}</p>
+          {{/if}} --}}
+        </header>
+  
+    </div>
+  </div>
+
+</div>
+
+<div class="section-page-main section-page-layout">
+	<div class="container">
+           <nav class="sub-nav sub-nav-inverse">
+      {{breadcrumbs}}
+    </nav>
+    {{#if section.description}}
+            <p class="page-header-description">{{section.description}}</p>
+          {{/if}}
+
+    {{#if section.sections}}
+      <ul class="section-list section-list--collapsed sub-sections-list">
+        {{#each section.sections}}
+        <li class="section-list-item">
+          <h4>
+            <a href="{{url}}">
+              {{name}}
+            </a>
+          </h4>
+         {{#if articles}}
+          <ul class="article-list">
+            {{#each articles}}
+            
+              <li class="training-listing{{#is id 360044524991}} article-promoted{{/is}}">
+
+                <a href="{{url}}" class="">
+                  {{title}}
+                  {{!-- #if promoted}}
+                    <span data-title="{{t 'promoted'}}" class="icon-star"></span>
+                  {{/if --}}
+                  <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 37.07 37.07"><defs><style>.cls-1{fill:none;}.cls-2{fill:#1b3d6e;}.cls-3{clip-path:url(#clip-path);}</style><clipPath id="clip-path" transform="translate(-55.32 -53.9)"><rect class="cls-1" x="55.32" y="53.9" width="37.07" height="37.07"/></clipPath></defs><polygon class="cls-2" points="16.15 29.24 13.86 26.95 22 18.8 13.86 10.66 16.15 8.36 26.6 18.8 16.15 29.24"/><g class="cls-3"><path class="cls-2" d="M73.85,56.83A15.61,15.61,0,1,0,89.46,72.44,15.63,15.63,0,0,0,73.85,56.83m0,34.14A18.54,18.54,0,1,1,92.39,72.44,18.55,18.55,0,0,1,73.85,91" transform="translate(-55.32 -53.9)"/></g></svg>
+                </a>
+
+              </li>
+            {{/each}}
+              {{#if more_articles}}
+              <li>
+                <a href="{{url}}" class="see-all-articles">
+                  {{t 'show_all_articles' count=article_count}}
+                </a>
+              </li>
+          {{/if}}
+          </ul>
+
+        {{/if}}
+          </li>
+        {{/each}}
+        <a tabindex="0" class="see-all-sections-trigger" aria-hidden="true" id="see-all-sections-trigger" title="{{t 'see_all_sections'}}">{{t 'see_all_sections'}}</a>
+      </ul>
+    {{/if}}
+
+
+  {{#if section.articles}}
+  <div class="section-articles-container">
+{{!--     <h3>Available Training Selections</h3> --}}
+        <ul class="blocks-list">
+         {{#each section.articles}}
+                      <li class="blocks-item article-blocks sect-id-{{../section.id}} art-id-{{id}}" id="training-icon" >
+              <a href='{{url}}' class="blocks-item-link">
+                <span class="blocks-item-title training">{{title}}</span>
+              </a>
+            </li>
+          
+{{!--                 <li class="{{#if promoted}} article-promoted{{/if}} blocks-item">
+									
+                  <a href="{{url}}">
+                    {{title}} --}}
+                    {{!-- #if promoted}}
+                      <span data-title="{{t 'promoted'}}" class="icon-star"></span>
+                    {{/if --}}
+                  {{!--  <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 37.07 37.07"><defs><style>.cls-1{fill:none;}.cls-2{fill:#1b3d6e;}.cls-3{clip-path:url(#clip-path);}</style><clipPath id="clip-path" transform="translate(-55.32 -53.9)"><rect class="cls-1" x="55.32" y="53.9" width="37.07" height="37.07"/></clipPath></defs><polygon class="cls-2" points="16.15 29.24 13.86 26.95 22 18.8 13.86 10.66 16.15 8.36 26.6 18.8 16.15 29.24"/><g class="cls-3"><path class="cls-2" d="M73.85,56.83A15.61,15.61,0,1,0,89.46,72.44,15.63,15.63,0,0,0,73.85,56.83m0,34.14A18.54,18.54,0,1,1,92.39,72.44,18.55,18.55,0,0,1,73.85,91" transform="translate(-55.32 -53.9)"/></g></svg> --}}
+{{!--                   </a>
+                  <div><a href='{{url}}' class="training-button button button-large">Learn More</a></div>
+                </li> --}}
+          
+              {{/each}}
+        </ul>
+{{!--           {{else}}
+        <i class="section-empty">
+          <a href="{{section.url}}">{{t 'empty'}}</a>
+        </i> --}}
+      {{/if}}
+
+      {{pagination}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,279 @@
+<!-- added boot strap to the article pages only - 04.07.2020 Brian Blumenthal-->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- added boot strap to the article pages only - 04.07.2020 Brian Blumenthal-->
+<div class="article-main interior-page">
+  <div class="container article-main-container">
+    <nav class="sub-nav">
+      {{breadcrumbs}}
+      {{search scoped=settings.scoped_kb_search submit=false}}
+    </nav>
+    <div class="article-container" id="article-container">
+      <aside class="article-sidebar" aria-labelledby="section-articles-title">
+        {{#if settings.show_articles_in_section}}
+          <div class="collapsible-sidebar">
+            <button type="button" class="collapsible-sidebar-toggle" aria-labelledby="section-articles-title" aria-expanded="false"></button>
+            <span id="section-articles-title" class="collapsible-sidebar-title sidenav-title">
+              {{t 'articles_in_section'}}
+            </span>
+            <div class="collapsible-sidebar-body">
+              <ul>
+                {{#each section.articles}}
+                  <li>
+                    <a href="{{url}}" class="sidenav-item {{#is id ../article.id}}current-article{{/is}}">{{title}}</a>
+                  </li>
+                {{/each}}
+              </ul>
+              {{#if section.more_articles}}
+                <a href="{{section.url}}" class="article-sidebar-item">{{t 'see_more'}}</a>
+              {{/if}}
+            </div>
+          </div>
+        {{/if}}
+        {{#if settings.show_recently_viewed_articles}}
+          <div class="collapsible-sidebar">
+            <button type="button" class="collapsible-sidebar-toggle" aria-labelledby="section-articles-title" aria-expanded="false"></button>
+            <span id="section-articles-title" class="collapsible-sidebar-title sidenav-title recent-articles-title-span">
+              Recent Articles
+            </span>
+            <div class="collapsible-sidebar-body">
+              {{recent_articles}}
+            </div>
+          </div>
+        {{/if}}
+      </aside>
+
+      <article class="article">
+        <header class="article-header">
+          <h1 title="{{article.title}}" class="article-title">
+            {{article.title}}
+            {{#if article.internal}}
+              <span class="icon-lock" title="{{t 'internal'}}"></span>
+            {{/if}}
+          </h1>
+          <div class="article-author">
+            {{#if settings.show_article_author}}
+              <div class="avatar article-avatar">
+                {{#if article.author.agent}}
+                  <span class="icon-agent"></span>
+                {{/if}}
+                <img src="{{article.author.avatar_url}}" alt="" class="user-avatar" />
+              </div>
+            {{/if}}
+            <div class="article-meta">
+              {{#if settings.show_article_author}}
+                {{#link 'user_profile' id=article.author.id}}
+                {{article.author.name}}
+                {{/link}}
+              {{/if}}
+              <ul class="meta-group">
+                {{#is article.created_at article.edited_at}}
+                  <li class="meta-data">{{date article.created_at timeago=true}}</li>
+                  {{else}}
+                    <li class="meta-data">{{date article.edited_at timeago=true}}</li>
+                    <li class="meta-data">{{t 'updated'}}</li>
+                {{/is}}
+              </ul>
+            </div>
+          </div>
+          {{#if settings.show_follow_article}}
+            {{subscribe}}
+          {{/if}}
+        </header>
+        <section class="article-info">
+          <div class="article-content">
+            <div class="article-body">{{article.body}}</div>
+            <div class="article-attachments">
+              <ul class="attachments">
+                {{#each attachments}}
+                  <li class="attachment-item">
+                    <a href="{{url}}" target="_blank">{{name}}</a>
+                    <div class="attachment-meta meta-group">
+                      <span class="attachment-meta-item meta-data">{{size}}</span>
+                      <a href="{{url}}" target="_blank" class="attachment-meta-item meta-data">Download</a>
+                    </div>
+                  </li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+        </section>
+        <footer>
+          <div class="article-footer">
+            {{#if settings.show_article_sharing}}
+              <div class="article-share">{{share}}</div>
+            {{/if}}
+          </div>
+          <div class="article-stats">
+            <div>
+              {{#with article}}
+                {{!-- <span class="article-votes-question">{{t 'was_this_article_helpful'}}</span> --}}
+                <div class="article-votes-controls" role='radiogroup'>
+                  {{vote 'up' role='radio' class='button article-vote article-vote-up'}}
+                  <span class="up-count">{{vote 'label' class='article-vote-label'}}</span>
+                  {{vote 'down' role='radio' class='button article-vote article-vote-down'}}
+                  <span class="down-count">{{vote 'label' class='article-vote-label'}}</span>
+                </div>
+                {{!-- <small class="article-votes-count">
+                {{vote 'label' class='article-vote-label'}}
+              </small> --}}
+              {{/with}}
+              {{#if settings.show_article_comments}}
+                {{#if comments}}
+                  <a href="#article-comments" class="article-comment-count" title="{{t 'go_to_comments'}}">
+                    <span class="visibility-hidden">
+                      {{t 'comments_count' count=article.comment_count}}
+                    </span>
+                    <span aria-hidden="true">
+                      <svg  data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33.99 27.09">
+                        <path id="Icon_awesome-comments" data-name="Icon awesome-comments" style="fill:none;stroke:#898d8d;stroke-width:3px;" d="M32.13,24.76c0-5-5.21-9-11.64-9s-11.65,4-11.65,9A7.59,7.59,0,0,0,11,29.91,13.06,13.06,0,0,1,9,33a.43.43,0,0,0-.08.48.41.41,0,0,0,.41.27,9.75,9.75,0,0,0,5-1.4,14.18,14.18,0,0,0,6.23,1.4C26.92,33.71,32.13,29.7,32.13,24.76Zm5.58,11.32a7.59,7.59,0,0,0,2.13-5.15A8,8,0,0,0,37,25.05a11.73,11.73,0,0,0-4.37-2.41,8.42,8.42,0,0,1,.07,1.12c0,5.93-6,10.75-13.44,10.75a17.5,17.5,0,0,1-1.77-.1c1.76,3.22,5.9,5.48,10.73,5.48a14.26,14.26,0,0,0,6.23-1.4,9.89,9.89,0,0,0,5,1.4.45.45,0,0,0,.41-.27.46.46,0,0,0-.09-.49A12.37,12.37,0,0,1,37.71,36.08Z" transform="translate(-7.34 -14.3)"/>
+                      </svg>
+                      {{article.comment_count}}
+                    </span>
+                  </a>
+                {{/if}}
+              {{/if}}
+            </div>
+            <p>Have more questions? <a href="/requests/new">Submit a ticket</a></p>
+          </div>
+ 
+          <div class="article-return-to-top">
+            <a href="#article-container">{{t 'return_to_top'}}<span class="icon-arrow-up"></span></a>
+          </div>
+        </footer>
+        {{!--  <div class="article-relatives">
+
+          {{#if settings.show_related_articles}}
+          {{related_articles}}
+          {{/if}}
+        </div> --}}
+        {{#if settings.show_article_comments}}
+          <div class="article-comments" id="article-comments">
+            <section class="comments">
+              <header class="comment-overview">
+                {{!-- <h2 class="comment-heading">
+                  {{t 'comments'}}
+                </h2> --}}
+                <p class="comment-callout">{{t 'comments_count' count=article.comment_count}}</p>
+                {{#if comments}}
+                  <div class="dropdown comment-sorter">
+                    <button class="dropdown-toggle" aria-haspopup="true">
+                      {{t 'sort_by'}}
+                    </button>
+                    <span class="dropdown-menu" role="menu">
+                      {{#each comment_sorters}}
+                        <a aria-selected="{{selected}}" href="{{url}}" role="menuitem">{{name}}</a>
+                      {{/each}}
+                    </span>
+                  </div>
+                {{/if}}
+              </header>
+              <ul id="comments" class="comment-list">
+                {{#each comments}}
+                  <li id="{{anchor}}" class="comment">
+                    <div class="comment-wrapper">
+                      <div class="comment-info">
+                        <div class="comment-author">
+                          <div class="avatar comment-avatar">
+                            {{#if author.agent}}
+                              <span class="icon-agent"></span>
+                            {{/if}}
+                            <img src="{{author.avatar_url}}" alt="" class="user-avatar" />
+                          </div>
+                          <div class="comment-meta">
+                            <span title="{{author.name}}">
+                              {{#link 'user_profile' id=author.id}}
+                              {{author.name}}
+                              {{/link}}
+                            </span>
+                            <ul class="meta-group">
+                              {{#if editor}}
+                                <li class="meta-data">{{date edited_at timeago=true}}</li>
+                                <li class="meta-data">{{t 'edited'}}</li>
+                              {{else}}
+                                <li class="meta-data">{{date created_at timeago=true}}</li>
+                              {{/if}}
+                            </ul>
+                          </div>
+                          <div class="comment-labels">
+                            {{#with ticket}}
+                              <a href="{{url}}" target="_zendesk_lotus" class="status-label escalation-badge">
+                                {{t 'request'}}{{id}}
+                              </a>
+                            {{/with}}
+                            {{#if pending}}
+                              <span class="comment-pending status-label status-label-pending">{{t 'pending_approval'}}</span>
+                            {{/if}}
+                          </div>
+                        </div>
+                        <section class="comment-body">
+
+                          {{body}}</section>
+                      </div>
+                      <div class="comment-actions-container">
+                        <div class="comment-actions actions">
+                          {{actions}}
+                        </div>
+                      </div>
+                    </div>
+                        <div class="comment-vote vote" role='radiogroup'>
+                          {{#vote 'up' role='radio' class='vote-up' selected_class='vote-voted'}}
+                            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.51 26.89">
+                              <path
+                                  id="Icon_feather-thumbs-up"
+                                  data-name="Icon feather-thumbs-up"
+                                  style="fill: none;
+                                          stroke: #898d8d;
+                                          stroke-linecap: round;
+                                          stroke-linejoin: round;
+                                          stroke-width: 3px;"
+                                  d="M27.17,23.1V18.32a3.58,3.58,0,0,0-3.58-3.58h0L18.81,25.49V38.63H32.28a2.4,2.4,0,0,0,2.39-2l1.65-10.75a2.38,2.38,0,0,0-2-2.72,2.56,2.56,0,0,0-.39,0ZM18.81,38.63H15.23a2.39,2.39,0,0,1-2.39-2.39V27.88a2.39,2.39,0,0,1,2.39-2.39h3.58"
+                                  transform="translate(-11.34 -13.24)"
+                              />
+                          </svg>
+
+                          {{/vote}}
+                          {{vote 'sum' class='vote-sum'}}
+                          {{#vote 'down' role='radio' class='vote-down' selected_class='vote-voted'}}
+                            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.51 26.89">
+                              <path
+                                  id="Icon_feather-thumbs-up"
+                                  data-name="Icon feather-thumbs-up"
+                                  style="fill: none;
+                                          stroke: #898d8d;
+                                          stroke-linecap: round;
+                                          stroke-linejoin: round;
+                                          stroke-width: 3px;"
+                                  d="M27.17,23.1V18.32a3.58,3.58,0,0,0-3.58-3.58h0L18.81,25.49V38.63H32.28a2.4,2.4,0,0,0,2.39-2l1.65-10.75a2.38,2.38,0,0,0-2-2.72,2.56,2.56,0,0,0-.39,0ZM18.81,38.63H15.23a2.39,2.39,0,0,1-2.39-2.39V27.88a2.39,2.39,0,0,1,2.39-2.39h3.58"
+                                  transform="translate(-11.34 -13.24)"
+                              />
+                          </svg>
+                          {{/vote}}
+                        </div>
+                  </li>
+                {{/each}}
+              </ul>
+              {{pagination}}
+              {{#form 'comment' class='comment-form'}}
+                <div class="avatar comment-avatar">
+                  {{user_avatar class='user-avatar'}}
+                </div>
+                <div class="comment-container">
+                  {{wysiwyg 'body'}}
+                  <div class="comment-form-controls">
+                    {{input type='submit'}}
+                  </div>
+                </div>
+              {{/form}}
+              <p class="comment-callout">{{comment_callout}}</p>
+            </section>
+          </div>
+        {{/if}}
+      </article>
+    </div>
+  </div>
+</div>

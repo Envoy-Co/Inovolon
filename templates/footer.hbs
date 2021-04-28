@@ -1,0 +1,81 @@
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-links">
+        <nav>
+          <h5>About</h5>
+          <a href="https://www.inovalon.com/about/">Overview</a>
+          <a href="https://www.inovalon.com/solutions/">Our Solution</a>
+          <a href="https://www.inovalon.com/news/">News</a>
+        </nav>
+        <nav>
+          <h5>Who We Help</h5>
+          <a href="https://www.inovalon.com/solutions/payers/">Payers</a>
+          <a href="https://www.inovalon.com/solutions/providers/">Providers</a>
+          <a href="https://www.inovalon.com/solutions/lifesciences/">Life Sciences</a>
+          <a href="https://www.inovalon.com/solutions/pharmacy/">Pharmacy</a>
+        </nav>
+        <nav>
+          <h5>Company</h5>
+          <a href="https://www.inovalon.com/" target="_blank">Inovalon.com</a>
+          <a href="https://www.inovalon.com/inovalon-insights-blog/">Blog</a>
+          <a href="https://www.inovalon.com/events/">Events</a>
+          <a href="https://www.inovalon.com/contact/inquiries/">Contact Us</a>
+        </nav>
+        <nav>
+          <h5>Legal</h5>
+          {{!-- <a href="#">Security</a>
+          <a href="#">Cookie Notice</a>
+          <a href="#">Global Privacy</a> --}}
+          <a href="https://www.inovalon.com/privacy/">Privacy Notice</a>
+          <a href="https://www.inovalon.com/terms/">Terms of Use</a>
+        </nav>
+      </div>
+      <div class="footer-search">
+        {{search submit=false instant=settings.instant_search class='search search-full' placeholder="Search…"}}
+      </div>
+    </div>
+    {{!-- <div class="footer-language-selector">
+      {{#if alternative_locales}}
+        <div class="dropdown language-selector">
+          <button class="dropdown-toggle" aria-haspopup="true">
+            {{current_locale.name}}
+          </button>
+          <span class="dropdown-menu dropdown-menu-end" role="menu">
+            {{#each alternative_locales}}
+              <a href="{{url}}" dir="{{direction}}" rel="nofollow" role="menuitem">
+                {{name}}
+              </a>
+            {{/each}}
+          </span>
+        </div>
+      {{/if}}
+    </div> --}}
+    <div class="footer-bottom">
+      <div class="copyright">
+        &copy; {{#link 'help_center'}}{{help_center.name}}{{/link}} <span class="year"></span> | All rights reserved.
+      </div>
+      <nav class="footer-social">
+        <a href="https://www.facebook.com/Inovalon">
+          <i class="fa fa-facebook"><span>Facebook</span></i>
+        </a>
+        <a href="https://twitter.com/InovalonInc">
+          <i class="fa fa-twitter"><span>Twitter</span></i>
+        </a>
+        <a href="https://www.linkedin.com/company/inovalon">
+          <i class="fa fa-linkedin"><span>LinkedIn</span></i>
+        </a>
+        <a href="https://www.youtube.com/user/InovalonInc">
+          <i class="fa fa-youtube"><span>YouTube</span></i>
+        </a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+
+{{!-- jQuery --}}
+
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>

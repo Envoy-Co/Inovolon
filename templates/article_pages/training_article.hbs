@@ -1,0 +1,121 @@
+<!-- added boot strap to the article pages only - 04.07.2020 Brian Blumenthal-->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- added boot strap to the article pages only - 04.07.2020 Brian Blumenthal-->
+<div class="article-main interior-page">
+  <div class="container article-main-container">
+    <nav class="sub-nav">
+      {{breadcrumbs}}
+      {{search scoped=settings.scoped_kb_search submit=false}}
+    </nav>
+    <div class="article-container" id="article-container">
+      <aside class="article-sidebar" aria-labelledby="section-articles-title">
+        {{#if settings.show_articles_in_section}}
+          <div class="collapsible-sidebar">
+            <button type="button" class="collapsible-sidebar-toggle" aria-labelledby="section-articles-title" aria-expanded="false"></button>
+            <span id="section-articles-title" class="collapsible-sidebar-title sidenav-title">
+              Other offerings
+            </span>
+            <div class="collapsible-sidebar-body">
+              <ul>
+                {{#each section.articles}}
+                  <li>
+                    <a href="{{url}}" class="sidenav-item {{#is id ../article.id}}current-article{{/is}}">{{title}}</a>
+                  </li>
+                {{/each}}
+              </ul>
+              {{#if section.more_articles}}
+                <a href="{{section.url}}" class="article-sidebar-item">{{t 'see_more'}}</a>
+              {{/if}}
+            </div>
+          </div>
+        {{/if}}
+        {{#if settings.show_recently_viewed_articles}}
+          <div class="collapsible-sidebar">
+            <button type="button" class="collapsible-sidebar-toggle" aria-labelledby="section-articles-title" aria-expanded="false"></button>
+            <span id="section-articles-title" class="collapsible-sidebar-title sidenav-title recent-articles-title-span">
+              Recently Visited 
+            </span>
+            <div class="collapsible-sidebar-body">
+              {{recent_articles}}
+            </div>
+          </div>
+        {{/if}}
+      </aside>
+
+      <article class="article">
+        <header class="article-header">
+          <h1 title="{{article.title}}" class="article-title">
+            {{article.title}}
+            {{#if article.internal}}
+              <span class="icon-lock" title="{{t 'internal'}}"></span>
+            {{/if}}
+          </h1>
+        {{!--   <div class="article-author">
+            {{#if settings.show_article_author}}
+              <div class="avatar article-avatar">
+                {{#if article.author.agent}}
+                  <span class="icon-agent"></span>
+                {{/if}}
+                <img src="{{article.author.avatar_url}}" alt="" class="user-avatar" />
+              </div>
+            {{/if}}
+            <div class="article-meta">
+              {{#if settings.show_article_author}}
+                {{#link 'user_profile' id=article.author.id}}
+                {{article.author.name}}
+                {{/link}}
+              {{/if}}
+              <ul class="meta-group">
+                {{#is article.created_at article.edited_at}}
+                  <li class="meta-data">{{date article.created_at timeago=true}}</li>
+                  {{else}}
+                    <li class="meta-data">{{date article.edited_at timeago=true}}</li>
+                    <li class="meta-data">{{t 'updated'}}</li>
+                {{/is}}
+              </ul>
+            </div>
+          </div>
+          {{#if settings.show_follow_article}}
+            {{subscribe}}
+          {{/if}}
+        </header> --}}
+        <section class="article-info">
+          <div class="article-content">
+            <div class="article-body">{{article.body}}</div>
+            <div class="article-attachments">
+              <ul class="attachments">
+                {{#each attachments}}
+                  <li class="attachment-item">
+                    <a href="{{url}}" target="_blank">{{name}}</a>
+                    <div class="attachment-meta meta-group">
+                      <span class="attachment-meta-item meta-data">{{size}}</span>
+                      <a href="{{url}}" target="_blank" class="attachment-meta-item meta-data">Download</a>
+                    </div>
+                  </li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+        </section>
+        <footer>
+         
+          <div class="article-return-to-top">
+            <a href="#article-container">{{t 'return_to_top'}}<span class="icon-arrow-up"></span></a>
+          </div>
+        </footer>
+        {{!--  <div class="article-relatives">
+
+          {{#if settings.show_related_articles}}
+          {{related_articles}}
+          {{/if}}
+        </div> --}}
+      
+      </article>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,147 @@
+  <section class="section hero community-hero">
+    <div class="hero-inner">
+      <h1>Explore. Empower. Engage.</h1>
+      <div class="search-container">
+      	{{search submit=false class='search search-full' scoped=settings.scoped_community_search}}
+      </div>
+    </div>
+  </section>
+
+<div class="community-page">
+  <div class="container">
+   
+    
+    <div class="community-intro-topics">
+    <ul class=" blocks-list topics-list">
+    	{{#each topics}}
+      	{{#is name 'Welcome'}}
+          <li class="intro-topic blocks-item topics-item" id="topic-id-{{id}}">
+            <a href="{{url}}" class="blocks-item-link">
+              <h3>{{name}}</h3>
+            	<p>{{excerpt description}}</p>
+            </a>
+          </li>
+      	{{/is}}
+      	{{#is name 'Announcements & Events'}}
+          <li class="intro-topic blocks-item topics-item" id="topic-id-{{id}}">
+          	<a href="{{url}}" class="blocks-item-link">
+            	<h3>{{name}}</h3>
+              <p>{{excerpt description}}</p>
+            </a>
+          </li>
+      	{{/is}}
+      {{/each}}
+    </ul>
+      <span class="homepage-post-to-community">
+        {{link 'new_post' role='button' class='button-large'}}
+      </span>
+    </div>
+  
+    
+     {{!-- more categories selectior --}}
+    <div id="choose-your-category">
+      <a class="menu-trigger" href="#">
+        <span>Choose your category</span>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 17.2 9.8" style="enable-background:new 0 0 17.2 9.8;" xml:space="preserve">
+  				<path stroke="#000" fill="none" stroke-width="1.6994" d="M0.6,0.6l8,8l8-8" />
+				</svg>
+      </a>
+      <nav></nav>
+    </div>
+    
+    <div class="products-topics-tabs">
+      
+      <nav class="tab-selector"></nav>
+      
+      <div class="blocks topics">
+        <ul class="blocks-list topics-list">
+          {{#each topics}}
+            {{#isnt name 'Welcome'}}
+            {{#isnt name 'Announcements & Events'}}
+            <li id="topic-id-{{id}}" class="blocks-item topics-item {{#if internal}}blocks-item-internal{{/if}}">
+               <a href="{{url}}" class="blocks-item-link">
+                 <span class="blocks-item-title">
+                   {{name}}
+                   {{#if internal}}
+                     <span class="icon-lock" title="{{t 'internal'}}"></span>
+                   {{/if}}
+                 </span>
+                 <span class="blocks-item-description">{{excerpt description}}</span>
+                 {{!-- <ul class="meta-group">
+                   <li class="meta-data">{{t 'post_count' count=post_count}}</li>
+                   <li class="meta-data">{{t 'follower_count' count=follower_count}}</li>
+                 </ul> --}}
+               </a>
+            </li>
+          {{/isnt}}
+          {{/isnt}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    
+    
+
+<div id="community-feeds-tabs">
+  <ul>
+    <li><a href="#featured-post">Featured Posts</a></li>
+    <li><a href="#recent-activity">Recent Activity</a></li>
+    <li><a href="#categories">Categories</a></li>
+  </ul>
+  <div id="featured-post">
+   {{#if featured_posts}}
+        <section class="section community-featured-posts">
+          <h3>{{t 'featured_posts'}}</h3>
+          <ul class="promoted-articles">
+            {{#each featured_posts}}
+              <li class="promoted-articles-item">
+                <div class="striped-list-item {{#if featured}}post-featured{{/if}}">
+                  <span class="striped-list-info">
+                    <a href="{{url}}" id="title-{{id}}" class="striped-list-title">{{title}}</a>
+
+                    <ul class="meta-group">
+                      <li class="meta-data">{{author.name}}</li>
+                      {{#if editor}}
+                        <li class="meta-data">{{date edited_at timeago=true}}</li>
+                        <li class="meta-data">{{t 'edited'}}</li>
+                      {{else}}
+                        <li class="meta-data">{{date created_at timeago=true}}</li>
+                      {{/if}}
+                    </ul>
+                  </span>
+
+                  <div class="post-overview-count striped-list-count">
+                    <span class="striped-list-count-item">
+                      <span class="striped-list-number">{{vote_sum}}</span>
+                      {{t 'vote' count=vote_sum}}
+                    </span>
+                    <span class="striped-list-count-item">
+                      <span class="striped-list-number">{{comment_count}}</span>
+                      {{t 'comment' count=comment_count}}
+                    </span>
+                  </div>
+                </div>
+              </li>
+            {{/each}}
+          </ul>
+        </section>
+      {{/if}}
+    </div>
+    <div id="recent-activity">
+       <section class="community-activity activity">
+        {{#if help_center.community_enabled}}
+          {{recent_activity scope='community'}}
+        {{/if}}
+      </section>
+    </div>
+    <div id="categories">
+      <ul class="promoted-articles">
+      {{#each topics}}
+          <li class="promoted-articles-item">
+              <a href="{{url}}" class="striped-list-title">{{name}}</a>
+        </li>
+			{{/each}}
+      </ul>
+    </div>
+  </div>
+</div>

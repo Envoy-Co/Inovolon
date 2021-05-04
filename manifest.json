@@ -45,6 +45,17 @@
         }
       ]
     },
+    {"label": "organization_forms",
+      "variables": [
+        {
+          "identifier": "org_forms",
+          "type": "text",
+          "description": "organization_forms_ids",
+          "label": "organization_forms_ids",
+          "value": "360000834051, 360001114531, 360001405992"
+        }
+      ]
+    },
     {
       "label": "fonts_group_label",
       "variables": [

@@ -50,7 +50,8 @@
         {
           "identifier": "org_forms",
           "type": "text",
-          "description": "Form IDs",
+          "description": "Form ID's",
+          "label": "Form ID's",
           "value": "360000834051, 360001114531, 360001405992"
         }
       ]

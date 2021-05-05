@@ -204,7 +204,16 @@ if (HelpCenter.user.role=="anonymous"){
 
       // Get orgs from user
       var orgs = HelpCenter.user.organizations;
-
+      var forms = document.getElementById('forms-data');;
+      var formIDs = forms.getAttribute('data-form-ids');
+      var formIDArray = formIDs.split(',');
+      var ticketFormIds = "";
+      for(var i=0; i<formIDArray.length; i++){
+        ticketFormIds += "{ id: " + formIDArray[i].trim() + "} ,";
+      }
+  		ticketFormIds = ticketFormIds.slice(0, -1)
+  		console.log(ticketFormIds);
+    
       // If user has no orgs skip the entire script below
       if( orgs.length > 0 || orgs != null || orgs != undefined){
 
@@ -252,7 +261,7 @@ if (HelpCenter.user.role=="anonymous"){
             window.zESettings = {
               webWidget: {
                 contactForm: {
-                  ticketForms: [{ id: 360001114531 }]
+                  ticketForms: [{ id: ticketFormIds }]
                 }
               }
             };

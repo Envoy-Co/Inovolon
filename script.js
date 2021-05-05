@@ -202,94 +202,96 @@ if (HelpCenter.user.role=="anonymous"){
   // Show certain forms for users that belong to an organization --------------------------------------- */
   // --------------------------------------------------------------------------------------------------- */
 
-      // Get orgs from user
-      var orgs = HelpCenter.user.organizations;
-      var forms = document.getElementById('forms-data');;
-      var formIDs = forms.getAttribute('data-form-ids');
-      var formIDArray = formIDs.split(',');
-      var ticketFormIds = "";
-      for(var i=0; i<formIDArray.length; i++){
-        ticketFormIds += "{ id: " + formIDArray[i].trim() + "} ,";
-      }
-  		ticketFormIds = ticketFormIds.slice(0, -1)
-  		console.log(ticketFormIds);
-    
-      // If user has no orgs skip the entire script below
-      if( orgs.length > 0 || orgs != null || orgs != undefined){
-
-        /* ------------------------------------------------------------------------------------- */
-        /* HIDE form 360000781352 internal from everyone except the below orgs ----------------- */
-        /* ------------------------------------------------------------------------------------- */
-        
-        /* --STEP ONE -------------------------------------------------------------------------- */
-        /* To create for other forms, just copy and paste this entire block, rename function  -- */
-        /* and add new function to load and form selector click (steps two and three) ---------- */
-        /* ------------------------------------------------------------------------------------- */
-        
-        // Unique function for this form, duplciate this entire function for additional forms
-        function checkInternalForm() {
-          // Setup matched org count
-         // var matchedOrgs = 0;
-
-          // Search the orgs for any of the following matches ------------ */
-          
-          // Create function to search for starting name to start with "INOV"
-          function startsWith(str, word) {
-            str = str.toLowerCase();
-            return str.lastIndexOf(word, 0) === 0;
-          }
-
-          // Search each org to see if it starts with "INOV"
-          $.grep(orgs, function (element, index) {
-            
-            var test = startsWith( element.name,"inov");
-            console.log(test);
-            if ( startsWith( element.name,"inov")){
-              console.log('User belongs to at least one approved org');
+       // Get orgs from user
+       var orgs = HelpCenter.user.organizations;
+       //Get form ID's from settings (Zendesk changes)
+       var forms = document.getElementById('forms-data');;
+       var formIDs = forms.getAttribute('data-form-ids');
+       var formIDArray = formIDs.split(',');
+       var ticketFormIds = "";
+       for(var i=0; i<formIDArray.length; i++){
+         ticketFormIds += "{ id: " + formIDArray[i].trim() + "} ,";
+       }
+       ticketFormIds = ticketFormIds.slice(0, -1)
+       console.log(ticketFormIds);
+       console.log(orgs);
+       // If user has no orgs skip the entire script below
+       if( orgs.length > 0 || orgs != null || orgs != undefined){
+ 
+         /* ------------------------------------------------------------------------------------- */
+         /* HIDE form 360000781352 internal from everyone except the below orgs ----------------- */
+         /* ------------------------------------------------------------------------------------- */
+         
+         /* --STEP ONE -------------------------------------------------------------------------- */
+         /* To create for other forms, just copy and paste this entire block, rename function  -- */
+         /* and add new function to load and form selector click (steps two and three) ---------- */
+         /* ------------------------------------------------------------------------------------- */
+         
+         // Unique function for this form, duplciate this entire function for additional forms
+         function checkInternalForm() {
+           // Setup matched org count
+           //Unwanted variable for counting (Zendesk changes)
+          // var matchedOrgs = 0;
+ 
+           // Search the orgs for any of the following matches ------------ */
+           
+           // Create function to search for starting name to start with "INOV"
+           function startsWith(str, word) {
+             console.log(str);
+             str = str.toUpperCase().trim();
+             return str.lastIndexOf(word, 0) === 0;
+           }
+ 
+           // Search each org to see if it starts with "INOV"
+           var matchedOrgs = $.grep(orgs, function (element, index) {
+             return startsWith( element.name,"INOV") ;
+              });
+ 
+           console.log(matchedOrgs);
+          // If user has none of the organizations above found, hide form #360000781352
+           if(matchedOrgs.length < 1){
+             console.log('User has no matching org');
+             $("#360000834051").remove();
+             $('#request_issue_type_select option[value="360000834051"]').remove();
+             // hide the request form selector field if user does not have INOV org
+             $('div.request_ticket_form_id').hide();
+             window.zESettings = {
+               webWidget: {
+                 contactForm: {
+                   ticketForms: [ { id: formIDArray[1]} ]
+                 }
+               }
+             };
+             orgs="";
+           }
+           else{
+             console.log('User has matching orgs');
               window.zESettings = {
-                webWidget: {
-                  contactForm: {
-                    ticketForms: [ ticketFormIds  ]
-                  }
-                }
-              };
-              // If a match is found, give positive score and show all forms
-             // matchedOrgs++;
-            }
-          });
-         // If user has none of the organizations above found, hide form #360000781352
-          if(orgs.length < 1){
-            console.log('User has no matching org');
-            $("#360000834051").remove();
-            $('#request_issue_type_select option[value="360000834051"]').remove();
-            // hide the request form selector field if user does not have INOV org
-            $('div.request_ticket_form_id').hide();
-            window.zESettings = {
-              webWidget: {
-                contactForm: {
-                  ticketForms: [ { id: formIDArray[1]} ]
-                }
-              }
-            };
-          }
-        }
-			} // End check internal form
-      
-      
- //for using existing function to control forms in Web Widget. 
- 
-// checkInternalForm();
- 
- /* ------------------------------------------------------------------------------------- */
- /* END HIDE form 360000781352 internal from everyone except the below orgs ------------- */
- /* ------------------------------------------------------------------------------------- */
- 
- if (window.location.href.indexOf("requests/new") > -1) {
-    checkInternalForm();
-    $('.request_ticket_form_id .nesty-input').bind( "click", function() {
-      checkInternalForm();
-    });
- }
+               webWidget: {
+                 contactForm: {
+                   ticketForms: [ ticketFormIds  ]
+                 }
+               }
+             };
+             orgs="";
+           }
+         }
+       } // End check internal form
+       
+       
+  //for using existing function to control forms in Web Widget. 
+  //Function getting called regardless (Zendesk changes)
+ // checkInternalForm();
+  
+  /* ------------------------------------------------------------------------------------- */
+  /* END HIDE form 360000781352 internal from everyone except the below orgs ------------- */
+  /* ------------------------------------------------------------------------------------- */
+ //Call form based on URL (Zendesk changes)
+  if (window.location.href.indexOf("requests/new") > -1) {
+     
+       checkInternalForm();
+     
+  }
  
 	  // Only run this script on form page  ------------------------------------------------------ */
 //    if ($(".request_ticket_form_id .nesty-input").length){

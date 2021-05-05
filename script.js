@@ -246,7 +246,13 @@ if (HelpCenter.user.role=="anonymous"){
             console.log(test);
             if ( startsWith( element.name,"inov")){
               console.log('User belongs to at least one approved org');
-
+              window.zESettings = {
+                webWidget: {
+                  contactForm: {
+                    ticketForms: [ ticketFormIds  ]
+                  }
+                }
+              };
               // If a match is found, give positive score and show all forms
              // matchedOrgs++;
             }
@@ -261,7 +267,7 @@ if (HelpCenter.user.role=="anonymous"){
             window.zESettings = {
               webWidget: {
                 contactForm: {
-                  ticketForms: [{ id: ticketFormIds }]
+                  ticketForms: [ { id: formIDArray[1]} ]
                 }
               }
             };

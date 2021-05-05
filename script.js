@@ -278,12 +278,12 @@ if (HelpCenter.user.role=="anonymous"){
  /* END HIDE form 360000781352 internal from everyone except the below orgs ------------- */
  /* ------------------------------------------------------------------------------------- */
  
-if (window.location.href.indexOf("requests/new") > -1) {
-     checkInternalForm();
-     $(document).ready(function() {
-       checkInternalForm();
-     });
-    }
+ if (window.location.href.indexOf("requests/new") > -1) {
+    checkInternalForm();
+    $('.request_ticket_form_id .nesty-input').bind( "click", function() {
+      checkInternalForm();
+    });
+ }
  
 	  // Only run this script on form page  ------------------------------------------------------ */
 //    if ($(".request_ticket_form_id .nesty-input").length){
